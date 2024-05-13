@@ -1,0 +1,31 @@
+// Variables
+// --------------------------------------------------
+$image-theme-path                : '../images/' !default;
+
+// standard colors
+$white		    : #FFF !default;
+$black			: #222 !default;
+$nocolor		: transparent !default;
+
+$font-family-second: 'bukan', sans-serif;
+$font-family-three: 'Roboto', sans-serif;
+
+$color-hover:       	$brand-primary;
+$body-text-color: #666; // Color product title
+$body-text-color2: #888; // Color product title
+$body-text-color3: #999; // Color product title
+$theme-color: 			#dd2a2a !default;
+$border-color:			#eee !default;
+$topbar-bg:#f7f7f7;
+$input-bg:#f6f6f6;
+$ribbon_hot:#f56642;
+$ribbon_sale:#fff;
+$ribbon_new:#222222;
+$ribbon_trend:#6dcfd8;
+/**
+ * Import component variables
+ */
+@import "form";
+@import "nav";
+@import "layout";
+@import "element";

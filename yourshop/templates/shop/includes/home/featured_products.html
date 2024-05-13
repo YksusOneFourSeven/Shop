@@ -1,0 +1,22 @@
+<div class="zoa-product pad3">
+    <h3 class="title text-center">Featured Products</h3>
+    <div class="container container-content">
+        <div class="row engoc-row-equal">
+            {% for product_image in product_images %}
+            <div class="col-xs-6 col-sm-4 col-md-15 col-lg-15 product-item">
+                <div class="product-img">
+                    <img src="{{ product_image.image.url }}" alt="{{ product_image.product.name }}" class="img-responsive">
+                </div>
+                <div class="product-info text-center">
+                    <h3 class="product-title">
+                        <a href="{% url 'store:product' product_image.product.pk %}">{{ product_image.product.name }}</a>
+                    </h3>
+                    <div class="product-price">
+                        <span>{{ product_image.product.price }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

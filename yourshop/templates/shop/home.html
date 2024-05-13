@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<body>
+
+
+    <div class="wrappage">
+        <!-- content -->
+        {% include 'shop/includes/home/content.html' %}
+        <!-- End content -->
+        <!-- banner -->
+        {% include 'shop/includes/home/banner.html' %}
+        <!-- End banner -->
+        <!-- featured products -->
+        {% include 'shop/includes/home/featured_products.html' %}
+        <!-- end featured products -->
+    </div>
+    <!-- brand -->
+    {% include 'shop/includes/home/brand.html' %}
+    <!-- end brand -->
+    <!-- emaill -->
+    {% include 'shop/includes/home/emaill.html' %}
+    <!-- end emaill-->
+  <script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/slick.min.js' %}"></script>
+<script src="{% static 'js/countdown.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+{% endblock %}

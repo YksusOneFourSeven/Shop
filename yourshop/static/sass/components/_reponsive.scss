@@ -1,0 +1,21 @@
+@media(min-width:$screen-md){
+	.product-item{
+	 	margin-bottom:20px;
+	 }
+}
+@media(max-width:$screen-md){
+	 .product-item{
+	 	margin-bottom:30px;
+	 }
+}
+@media(max-width:$screen-xs){
+	.product-item{
+		width:100%;
+	}
+	.blog-img{
+		width:100%;
+		img{
+			width: 100%;
+		}
+	}
+}

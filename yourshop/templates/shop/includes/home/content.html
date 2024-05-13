@@ -1,0 +1,15 @@
+<div class="slide v4 js-slider-v1">
+    {% for banner in banners %}
+    <div class="slide-img">
+        <img src="{{ banner.image.url }}" alt="{{ banner.title }}" class="img-responsive" style="width: 1920px; height: 970px;">
+        <div class="box-center content1">
+            <h3>{{ banner.title }}</h3>
+            <p>{{banner.description}}</p>
+            {% if banner.link %}
+            <a href="{{ banner.link }}" class="slide-btn">Shop Now</a>
+            {% endif %}
+        </div>
+    </div>
+    {% endfor %}
+</div>
+

@@ -1,0 +1,431 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<body>
+<!-- push menu-->
+{% include 'shop/includes/push_menu.html' %}
+<!-- end push menu-->
+
+
+<!-- Push cart -->
+{% include 'shop/includes/push_cart.html' %}
+<!-- End pushcart -->
+
+
+<!-- Search form -->
+{% include 'shop/includes/search.html' %}
+<!-- End search form -->
+
+<!-- Account -->
+{% include 'shop/includes/account.html' %}
+<!-- End Account -->
+<!-- Content -->
+<div class="container container-content">
+    <ul class="breadcrumb v2">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Category</a></li>
+        <li class="active">Single Product</li>
+    </ul>
+</div>
+<div class="container container-content">
+    <div class="single-product-detail v3">
+        <div class="row">
+            <div class="col-xs-12 col-sm-6 col-md-6 zoa-width1">
+                <div class="product-img-slide">
+                    <div class="product-images">
+                        <div class="ribbon zoa-sale"><span>-15%</span></div>
+                        <div class="main-img js-product-slider-normal">
+
+                            {% for image in images %}
+                            <a href="#" class="hover-images effect"><img src="{{image.image.url}}" alt="photo"
+                                                                         class="img-responsive"></a>
+                            {%endfor%}
+                        </div>
+                    </div>
+                    <div class="multiple-img-list js-click-product-normal">
+                        {% for image in images %}
+                        <div class="product-col">
+                            <div class="img">
+                                <img src="{{image.image.url}}" alt="images" class="img-responsive">
+                            </div>
+                        </div>
+                        {%endfor%}
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-6 zoa-width2">
+                <div class="single-product-info product-info product-grid-v2">
+                    <h3 class="product-title"><a href="#">{{product.name}}</a></h3>
+                    <div class="product-price">
+                        <!--                                <span class="old thin">$59.00</span>-->
+                        <span>{{product.price}}</span>
+                    </div>
+                    <div class="flex product-rating">
+                        <div class="group-star">
+                            {{comment_rate}}
+<!--                            <span class="star star-5"></span>-->
+<!--                            <span class="star star-4"></span>-->
+<!--                            <span class="star star-3"></span>-->
+<!--                            <span class="star star-2"></span>-->
+<!--                            <span class="star star-1"></span>-->
+                        </div>
+                        <div class="number-rating">( {{comment_count}} reviews )</div>
+                    </div>
+                    <!--                            <div class="product-countdown text-center">-->
+                    <!--                                <h3>HURRY! ONLY <span>36</span> LEFT IN STOCK.</h3>-->
+                    <!--                                <div class="progress">-->
+                    <!--                                    <span class="progress-bar progress-bar-striped active" style="width:64.4444%"></span>-->
+                    <!--                                </div>-->
+                    <!--                                <div class="countdown countdown-time" data-countdown="countdown" data-date="08-31-2018-00-00-00">-->
+                    <!--                                </div>-->
+                    <!--                            </div>-->
+                    <!--                            <div class="color-group">-->
+                    <!--                                <label>Color :</label>-->
+                    <!--                                <a href="#" class="circle gray"></a>-->
+                    <!--                                <a href="#" class="circle active yellow"></a>-->
+                    <!--                                <a href="#" class="circle white"></a>-->
+                    <!--                            </div>-->
+                    <div class="product-size">
+                        <div class="size-group">
+                            <label>Size : {{product.size}}</label>
+                            <select class="single-option-selector" data-option="option1" id="productSelect-option-0">
+                                {% for size in sizes %}
+                                <option value="36">{{size.size}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                        <a href="" class="size-guide">Size guide</a>
+                    </div>
+                    <div class="single-product-button-group">
+                        <div class="flex align-items-center element-button">
+                            <div class="zoa-qtt">
+                                <button type="button" class="quantity-left-minus btn btn-number js-minus"
+                                        data-type="minus" data-field="">
+                                </button>
+                                <input type="text" name="number" value="1" class="product_quantity_number js-number">
+                                <button type="button" class="quantity-right-plus btn btn-number js-plus"
+                                        data-type="plus" data-field="">
+                                </button>
+                            </div>
+                            <a href="" class="zoa-btn zoa-addcart">
+                                <i class="zoa-icon-cart"></i>add to cart
+                            </a>
+                        </div>
+                        <a href="" class="btn-wishlist">+ Add to wishlist</a>
+                    </div>
+
+                    <div class="product-social">
+                        <label>Share +</label>
+                        <div class="social">
+                            <a href=""><i class="fa fa-facebook"></i></a>
+                            <a href=""><i class="fa fa-twitter"></i></a>
+                            <a href=""><i class="fa fa-instagram"></i></a>
+                            <a href=""><i class="fa fa-pinterest"></i></a>
+                        </div>
+                    </div>
+                    <div class="single-product-tab bd-top">
+                        <div class="zoa-tab-collapse-block panel-group">
+                            <div class="panel zoa-tab-item">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title zoa-tab-title"><a href="#panelBodyOne"
+                                                                             class="accordion-toggle"
+                                                                             data-toggle="collapse"
+                                                                             data-parent="#accordion">Description</a>
+                                    </h3>
+                                </div>
+                                <div id="panelBodyOne" class="zoa-collapse-content panel-collapse collapse in">
+                                    <div class="panel-body">
+                                        <p>
+                                            {{product.description}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel zoa-tab-item">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title zoa-tab-title"><a href="#panelBodyTwo"
+                                                                             class="accordion-toggle"
+                                                                             data-toggle="collapse"
+                                                                             data-parent="#accordion">Shipping
+                                        Detail</a></h3>
+                                </div>
+                                <div id="panelBodyTwo" class="zoa-collapse-content panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <p>
+                                            Free shopping
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel zoa-tab-item">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title zoa-tab-title"><a href="#panelBodyThree"
+                                                                             class="accordion-toggle"
+                                                                             data-toggle="collapse"
+                                                                             data-parent="#accordion">Kомментарии
+                                        {{comment_count}}</a></h3>
+                                </div>
+                                <div id="panelBodyThree" class="zoa-collapse-content panel-collapse collapse">
+                                    <div class="panel-body">
+                                        <ul class="review-content">
+
+                                        {% for comment in comments %}
+
+                                            <li class="element-review">
+                                                <div class="flex align-items-center justify-content-between">
+                                                    <div class="review-left">
+                                                        <p class="r-name"></p>
+                                                        <p class="r-date">{{comment.created}}</p>
+                                                    </div>
+                                                    <div class="group-star">
+                                                        рейтинг: {{comment.rate}}
+                                                    </div>
+                                                </div>
+                                                <p class="r-desc">
+                                                    {{comment.text}}
+                                                </p>
+                                            </li>
+                                            {%endfor%}
+                                        </ul>
+                                        <div class="review-form">
+                                            <h3 class="review-heading">ваш комментарий:</h3>
+                                            <div class="rating-star">
+                                                <span class="fa fa-star-o" aria-hidden="true"></span>
+                                                <span class="fa fa-star-o" aria-hidden="true"></span>
+                                                <span class="fa fa-star-o" aria-hidden="true"></span>
+                                                <span class="fa fa-star-o" aria-hidden="true"></span>
+                                                <span class="fa fa-star-o" aria-hidden="true"></span>
+                                            </div>
+                                            <form method="post" action="{% url 'store:submit_comment' product.pk %}">
+                                                {% csrf_token %}
+                                                {{ comment_form.as_p }}
+
+                                                <!-- Звездочки для рейтинга -->
+<!--                                                <div class="rating">-->
+<!--&lt;!&ndash;                                                    <input type="radio" id="star5" name="rate" value="5"/><label&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        for="star5" title="5 stars">5 stars</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <input type="radio" id="star4" name="rate" value="4"/><label&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        for="star4" title="4 stars">4 stars</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <input type="radio" id="star3" name="rate" value="3"/><label&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        for="star3" title="3 stars">3 stars</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <input type="radio" id="star2" name="rate" value="2"/><label&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        for="star2" title="2 stars">2 stars</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                                    <input type="radio" id="star1" name="rate" value="1"/><label&ndash;&gt;-->
+<!--&lt;!&ndash;                                                        for="star1" title="1 star">1 star</label>&ndash;&gt;-->
+<!--                                                </div>-->
+                                                <!-- /Звездочки для рейтинга -->
+
+                                                <button type="submit" class="btn btn-primary">Отправить</button>
+                                            </form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container container-content">
+    <div class="product-related bd-top">
+        <h3 class="related-title text-center">Related products</h3>
+        <div class="owl-carousel owl-theme owl-cate v2 js-owl-cate">
+            <div class="product-item">
+                <div class="product-img">
+                    <a href=""><img src="../../static/img/product/related_1.jpg" alt="" class="img-responsive"></a>
+                    <div class="ribbon zoa-sale"><span>-15%</span></div>
+                    <div class="product-button-group">
+                        <a href="#" class="zoa-btn zoa-quickview">
+                            <span class="zoa-icon-quick-view"></span>
+                        </a>
+                        <a href="#" class="zoa-btn zoa-wishlist">
+                            <span class="zoa-icon-heart"></span>
+                        </a>
+                        <a href="#" class="zoa-btn zoa-addcart">
+                            <span class="zoa-icon-cart"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-info text-center">
+                    <h3 class="product-title">
+                        <a href="">Grosgrain tie cotton top</a>
+                    </h3>
+                    <div class="product-price">
+                        <span class="old">$25.5</span>
+                        <span>$20.9</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-img">
+                    <a href=""><img src="../../static/img/product/related_2.jpg" alt="" class="img-responsive"></a>
+                    <div class="product-button-group">
+                        <a href="#" class="zoa-btn zoa-quickview">
+                            <span class="zoa-icon-quick-view"></span>
+                        </a>
+                        <a href="#" class="zoa-btn zoa-wishlist">
+                            <span class="zoa-icon-heart"></span>
+                        </a>
+                        <a href="#" class="zoa-btn zoa-addcart">
+                            <span class="zoa-icon-cart"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-info text-center">
+                    <h3 class="product-title">
+                        <a href="">Grosgrain tie cotton top</a>
+                    </h3>
+                    <div class="product-price">
+                        <span>$20.9</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-img">
+                    <a href=""><img src="../../static/img/product/related_3.jpg" alt="" class="img-responsive"></a>
+                    <div class="ribbon zoa-sale"><span>-15%</span></div>
+                    <div class="product-button-group">
+                        <a href="#" class="zoa-btn zoa-quickview">
+                            <span class="zoa-icon-quick-view"></span>
+                        </a>
+                        <a href="#" class="zoa-btn zoa-wishlist">
+                            <span class="zoa-icon-heart"></span>
+                        </a>
+                        <a href="#" class="zoa-btn zoa-addcart">
+                            <span class="zoa-icon-cart"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-info text-center">
+                    <h3 class="product-title">
+                        <a href="">Grosgrain tie cotton top</a>
+                    </h3>
+                    <div class="product-price">
+                        <span class="old">$25.5</span>
+                        <span>$20.9</span>
+                    </div>
+                    <div class="color-group">
+                        <a href="#" class="circle gray"></a>
+                        <a href="#" class="circle yellow active"></a>
+                        <a href="#" class="circle white"></a>
+                    </div>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-img">
+                    <a href=""><img src="../../static/img/product/related_4.jpg" alt="" class="img-responsive"></a>
+                    <div class="ribbon zoa-hot"><span>hot</span></div>
+                    <div class="product-button-group">
+                        <a href="#" class="zoa-btn zoa-quickview">
+                            <span class="zoa-icon-quick-view"></span>
+                        </a>
+                        <a href="#" class="zoa-btn zoa-wishlist">
+                            <span class="zoa-icon-heart"></span>
+                        </a>
+                        <a href="#" class="zoa-btn zoa-addcart">
+                            <span class="zoa-icon-cart"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-info text-center">
+                    <h3 class="product-title">
+                        <a href="">Grosgrain tie cotton top</a>
+                    </h3>
+                    <div class="product-price">
+                        <span>$20.9</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-img">
+                    <a href=""><img src="../../static/img/product/related_5.jpg" alt="" class="img-responsive"></a>
+                    <div class="ribbon zoa-new"><span>new</span></div>
+                    <div class="product-button-group">
+                        <a href="#" class="zoa-btn zoa-quickview">
+                            <span class="zoa-icon-quick-view"></span>
+                        </a>
+                        <a href="#" class="zoa-btn zoa-wishlist">
+                            <span class="zoa-icon-heart"></span>
+                        </a>
+                        <a href="#" class="zoa-btn zoa-addcart">
+                            <span class="zoa-icon-cart"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-info text-center">
+                    <h3 class="product-title">
+                        <a href="">Grosgrain tie cotton top</a>
+                    </h3>
+                    <div class="product-price">
+                        <span>$20.9</span>
+                    </div>
+                </div>
+            </div>
+            <div class="product-item">
+                <div class="product-img">
+                    <a href=""><img src="../../static/img/product/related_5.jpg" alt="" class="img-responsive"></a>
+                    <div class="ribbon zoa-new"><span>new</span></div>
+                    <div class="product-button-group">
+                        <a href="#" class="zoa-btn zoa-quickview">
+                            <span class="zoa-icon-quick-view"></span>
+                        </a>
+                        <a href="#" class="zoa-btn zoa-wishlist">
+                            <span class="zoa-icon-heart"></span>
+                        </a>
+                        <a href="#" class="zoa-btn zoa-addcart">
+                            <span class="zoa-icon-cart"></span>
+                        </a>
+                    </div>
+                </div>
+                <div class="product-info text-center">
+                    <h3 class="product-title">
+                        <a href="">Grosgrain tie cotton top</a>
+                    </h3>
+                    <div class="product-price">
+                        <span>$20.9</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--            <div class="newsletter">-->
+<!--                <div class="container">-->
+<!--                    <div class="row">-->
+<!--                        <div class="col-md-5 col-sm-6 col-xs-12">-->
+<!--                            <div class="newsletter-heading">-->
+<!--                                <h3>get in touch</h3>-->
+<!--                                <p>Subscribe for latest stories and promotions (35% sale)</p>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="col-md-7 col-sm-6 col-xs-12 flex-end">-->
+<!--                            <form class="form_newsletter" action="#" method="post">-->
+<!--                                <input type="email" value="" placeholder="Enter your emaill" name="EMAIL" id="mail" class="newsletter-input form-control">-->
+<!--                                <button id="subscribe" class="button_mini zoa-btn" type="submit">-->
+<!--                                    Subscribe-->
+<!--                                </button>-->
+<!--                            </form>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!-- brand -->
+{% include 'shop/includes/home/brand.html' %}
+<!-- end brand -->
+<!-- emaill -->
+{% include 'shop/includes/home/emaill.html' %}
+<!-- end emaill-->
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/slick.min.js' %}"></script>
+<script src="{% static 'js/countdown.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+</body>
+
+{% endblock %}
+</html>
