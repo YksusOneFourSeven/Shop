@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% block title %}Войти{% endblock %}
+{% block content %}
+{% load user_filters %}
+
+
+<style>
+    .centered-form {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+    }
+
+    .form-container {
+        max-width: 400px;
+        width: 100%;
+    }
+
+    .btn-button-group .btn {
+        width: 100%;
+    }
+
+    .social-group-button a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 15px;
+        padding: 10px;
+        text-decoration: none;
+        color: white;
+    }
+
+    .twitter.button {
+        background-color: #1DA1F2;
+    }
+
+    .facebook.button {
+        background-color: #3b5998;
+    }
+
+    .slide p {
+        margin: 0;
+    }
+</style>
+
+<div class="container centered-form">
+    <div class="form-container">
+        <div class="account-wrapper">
+            {% include 'users/includes/head.html' %}
+            <div class="tab-content">
+                <div id="login" class="tab-pane fade in active">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card">
+                                <div class="card-header">регистрация</div>
+                                <div class="card-body">
+                                    {% if form.errors %}
+                                        {% for field in form %}
+                                            {% for error in field.errors %}
+                                                <div class="alert alert-danger">
+                                                    {{ error|escape }}
+                                                </div>
+                                            {% endfor %}
+                                        {% endfor %}
+                                        {% for error in form.non_field_errors %}
+                                            <div class="alert alert-danger">
+                                                {{ error|escape }}
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+
+                                    <form method="post" action="{% url 'users:signup' %}" class="form-customer form-login">
+                                        {% csrf_token %}
+                                        {% for field in form %}
+                                            <div class="form-group row my-3">
+                                                <label for="{{ field.id_for_label }}" class="col-md-4 col-form-label text-md-right">
+                                                    {{ field.label }}
+                                                    {% if field.field.required %}
+                                                        <span class="required text-danger">*</span>
+                                                    {% endif %}
+                                                </label>
+                                                <div class="col-md-6">
+                                                    {{ field|addclass:"form-control" }}
+                                                    {% if field.help_text %}
+                                                        <small id="{{ field.id_for_label }}-help" class="form-text text-muted">
+                                                            {{ field.help_text|safe }}
+                                                        </small>
+                                                    {% endif %}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        <div class="col-md-6 offset-md-4">
+                                            <button type="submit" class="btn btn-primary">зарегестрироваться</button>
+                                        </div>
+                                    </form>
+
+                                    <div class="social-group-button mt-3">
+                                        <a href="" class="twitter button">
+                                            <div class="slide">
+                                                <p>Connect with Twitter</p>
+                                            </div>
+                                            <div class="icon">
+                                                <i class="fa fa-twitter"></i>
+                                            </div>
+                                        </a>
+                                        <a href="" class="facebook button">
+                                            <div class="slide">
+                                                <p>Connect with Facebook</p>
+                                            </div>
+                                            <div class="icon">
+                                                <i class="fa fa-facebook"></i>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <span class="text-note">Don’t have an account? <a href="{% url 'users:signup' %}">Register!</a></span>
+                                </div> <!-- card body -->
+                            </div> <!-- card -->
+                        </div> <!-- col -->
+                    </div> <!-- row -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

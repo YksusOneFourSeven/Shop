@@ -1,0 +1,8 @@
+<ul class="account-tab text-center">
+    <li class="{% if request.path == '/auth/login/' %}active{% endif %}">
+        <a data-toggle="tab" href="{% url 'users:login' %}" id="loginTab">LOGIN</a>
+    </li>
+    <li class="{% if request.path == '/auth/signup/' %}active{% endif %}">
+        <a data-toggle="tab" href="{% url 'users:signup' %}" id="registerTab">Register</a>
+    </li>
+</ul>

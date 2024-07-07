@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import View
+from django.views.generic import View, TemplateView
 from .models import Banners, Products, ProductImage, Sizes, Comments
 from django.views.generic.detail import DetailView
 from django.shortcuts import redirect
@@ -7,6 +7,8 @@ from .forms import CommentForm
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Avg
 from django.db.models import Prefetch, OuterRef, Subquery
+
+
 
 
 class HomePageView(View):

@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<div class="container container-content">
+    <ul class="breadcrumb v2">
+        <li><a href="#">Home</a></li>
+        <li class="active">My Account</li>
+    </ul>
+</div>
+
+<div class="my-account">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-sm-4 howday">
+                <div class="titlelt">
+                    <h2>Привет, <strong>{{ user.username }}</strong></h2>
+                    <div class="address">
+                        <ul class="nav">
+                            <li><a href="#"><img src="{% static 'img/Icon_User.jpg' %}" alt="Icon_User.jpg"> Account detail</a></li>
+                            <li><a href="#"><img src="{% static 'img/Icon_Listing.jpg' %}" alt="Icon_User.jpg"> My orders</a></li>
+                            <li><a href="#"><img src="{% static 'img/Icon_Upload.jpg' %}" alt="Icon_User.jpg"> Wishlist</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="login">
+                        <ul class="nav">
+                            <li><a href="#"><img src="{% static 'img/Icon_Lock.jpg' %}" alt="Icon_User.jpg"> Change password</a></li>
+                            <li><a href="{% url 'users:logout' %}"><img src="{% static 'img/Icon_Off.jpg' %}" alt="Icon_User.jpg"> Log out</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8 col-sm-8 portfolio">
+                <div class="tab-content">
+                    <h1>Ваши данные</h1>
+
+                    <!-- Режим просмотра данных -->
+                    <div id="user-details-view">
+                        <ul class="user-details-list">
+                            {% for field, value in user_account_data.items %}
+                                <li><strong>{{ field|capfirst }}:</strong> {{ value }}</li>
+                            {% endfor %}
+                        </ul>
+                        <button id="editButton" class="change">Редактировать</button>
+                    </div>
+
+                    <!-- Режим редактирования данных (скрыт по умолчанию) -->
+                    <div id="user-details-edit" style="display: none;">
+                        <form id="editForm" method="post" action="{% url 'users:account' %}">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <div class="form-actions">
+                                <button type="submit">Сохранить</button>
+                                <button id="cancelButton" type="button">Отмена</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="newsletter">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-5 col-sm-6 col-xs-12">
+                <div class="newsletter-heading">
+                    <h3>Get in touch</h3>
+                    <p>Subscribe for latest stories and promotions (35% sale)</p>
+                </div>
+            </div>
+            <div class="col-md-7 col-sm-6 col-xs-12 flex-end">
+                <form class="form_newsletter" action="#" method="post">
+                    <input type="email" placeholder="Enter your email" name="EMAIL" id="mail" class="newsletter-input form-control">
+                    <button id="subscribe" class="button_mini zoa-btn" type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="{% static 'js/jquery.js' %}"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script src="{% static 'js/owl.carousel.min.js' %}"></script>
+<script src="{% static 'js/slick.min.js' %}"></script>
+<script src="{% static 'js/countdown.js' %}"></script>
+<script src="{% static 'js/main.js' %}"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('editButton').addEventListener('click', function() {
+            document.getElementById('user-details-view').style.display = 'none';
+            document.getElementById('user-details-edit').style.display = 'block';
+        });
+
+        document.getElementById('cancelButton').addEventListener('click', function() {
+            document.getElementById('user-details-view').style.display = 'block';
+            document.getElementById('user-details-edit').style.display = 'none';
+        });
+
+        $('#editForm').on('submit', function(event) {
+            event.preventDefault();
+            $.ajax({
+                type: 'POST',
+                url: $(this).attr('action'),
+                data: $(this).serialize(),
+                success: function(response) {
+                    if (response.status === 'success') {
+                        alert('Account updated successfully');
+                        location.reload();  // Обновить страницу, чтобы отобразить изменения
+                    } else {
+                        alert('Error updating account: ' + response.message);
+                    }
+                },
+                error: function(response) {
+                    alert('An error occurred. Please try again.');
+                }
+            });
+        });
+    });
+</script>
+
+{% endblock %}
